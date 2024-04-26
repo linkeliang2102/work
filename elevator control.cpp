@@ -1,4 +1,4 @@
-include<stdio.h>
+#include<stdio.h>
 #include<stdlib.h>
 #include<windows.h>
 
@@ -89,7 +89,7 @@ void display(int id)
             Sleep(800);
 }
 
-void elevatorruning(int floor_start, int floor_end)
+int elevatorruning(int floor_start, int floor_end)
 {
     int i,id,sub,subb=100,sub_1;
     enum system;
@@ -116,7 +116,12 @@ void elevatorruning(int floor_start, int floor_end)
                 if (sub_1 < subb)
                 {
                     subb = sub_1;
-                    id = i;
+                    if (floor_end <= 10&&floor_start<=10)
+                    {
+                        id = i;
+                    }
+                    else
+                        id = 4;
                 }
             }
         if (elevator[0].sever_floor == -1)//单层
@@ -126,7 +131,12 @@ void elevatorruning(int floor_start, int floor_end)
                 if (sub_1 < subb)
                 {
                     subb = sub_1;
-                    id = i;
+                    if (floor_end <= 10 && floor_start <= 10)
+                    {
+                        id = i;
+                    }
+                    else
+                        id = 4;
                 }
             }
         if (elevator[0].sever_floor == 0)//混层
@@ -136,7 +146,12 @@ void elevatorruning(int floor_start, int floor_end)
                 if (sub_1 < subb)
                 {
                     subb = sub_1;
-                    id = i;
+                    if (floor_end <= 10 && floor_start <= 10)
+                    {
+                        id = i;
+                    }
+                    else
+                        id = 4;
                 }
             }
     }
@@ -183,6 +198,7 @@ void elevatorruning(int floor_start, int floor_end)
     display(id);
     //printf("\t\t当前电梯所在楼层：%d\n", elevator[id].now_floor);
     printf("电梯%d已到达%d层\n", id, elevator[id].now_floor);
+    return id;
 }
 
 int main()
@@ -194,7 +210,6 @@ int main()
         scanf_s("%d", &floor_start);
         printf("前往楼层：");
         scanf_s("%d", &floor_end);
-        elevatorruning(floor_start, floor_end);
+        int a=elevatorruning(floor_start, floor_end);
     }
 }
-
